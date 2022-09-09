@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+            *{
+               margin: 0;
+               padding: 0;
+            }
+
+            .fundo{
+                background-image: linear-gradient(45deg, black, purple);
+                height: 100vh;
+                color: antiquewhite;
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+            }
+
+            .calculadora{
+                /* a calculadora vai  ocupar apenas o espaço da div dela*/
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.8);
+                /*centralizando*/
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%); /* - 50 no eixo x, -50 no eixo y */
+                border-radius: 15px;
+                padding: 15px; /* distancia entre os elementos e a borda*/
+            }
+
+            #result {
+                background-color: white;
+                width: 214px;
+                height: 30px;
+                margin: 5px;
+                color: black;
+                font-size: 24px;
+                text-align: right;
+                padding: 5px;
+
+            }
+
+            button{
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+                cursor: pointer; /* muda o icone do mouse quando passo por cima do elemento*/
+                background-color: rgb(31,31,31);
+                border: none;
+                color: cornsilk;
+                margin: 3px;
+            }
+
+            button:hover{ background-color: darkmagenta;}
+
+            .botaoIgualdade{height: 106px;}
+
+            .botaoZero{width: 106px;}
+           
+    </style>
+</head>
+<body>
+    <div class="fundo">
+        <h1> Isabela Neves</h1>
+        <div class="calculadora">
+            <h1>Calculadora</h1>
+            <p id="result"></p>
+
+ <!--- Uma tabela para criar os botões da calculadora --->           
+            <table>
+                <!--- Linha da tabela--->
+                <tr>
+                    <!--- tag de dados da tabela e em seguida a tag de botão --->
+                    <td><button onclick="clean()"> C </button></td>
+                    <td><button onclick="back()"> < </button></td>
+                    <td><button onclick="insert('/')"> / </button></td>
+                    <td> <button onclick="insert('*')"> x </button> </td>
+                </tr>
+
+                <tr>
+                    <!-- tag de dados da tabela e em seguida a tag de botão --> 
+
+                    <td><button onclick="insert('7')"> 7 </button></td>
+                    <td><button onclick="insert('8')"> 8 </button></td>
+                    <td><button onclick="insert('9')"> 9 </button></td>
+                    <td><button onclick="insert('-')"> - </button></td>
+                </tr>
+
+                <tr>
+                 <!-- tag de dados da tabela e em seguida a tag de botão --> 
+                    <td><button onclick="insert('4')"> 4 </button></td>
+                    <td><button onclick="insert('5')"> 5 </button></td>
+                    <td><button onclick="insert('6')"> 6 </button></td>
+                    <td><button onclick="insert('+')"> + </button></td>
+                </tr>
+
+                <tr>
+                    <!-- tag de dados da tabela e em seguida a tag de botão --> 
+                    <td><button onclick="insert('1')"> 1 </button></td>
+                    <td><button onclick="insert('2')"> 2 </button></td>
+                    <td><button onclick="insert('3')"> 3 </button></td>
+                    <!--- o = está ocupando duas linhas --->
+                    <td rowspan="2"><button class="botaoIgualdade" onclick="calcular()"> = </button></td>
+                </tr>
+
+                <tr>
+                    <!--tag de dados da tabela e em seguida a tag de botão -->
+                    <!-- o 0 está ocupando duas colunas -->
+                    <td colspan="2"><button class="botaoZero" onclick="insert('0')"> 0 </button></td>
+                    <td><button onclick="insert('.')"> . </button></td>
+                </tr>
+            </table>
+        </div>
+    </div> 
+    <!--animando os botões, criando uma função chamada insert --->
+    <!--depois ir em todos os botões de numéro e pôr o evento ONCLICK --->
+    <!--e dentro do evento colocar a função insert() e vc também vai pôr um --->
+    <!--- paramêtro de aspas simples que vai ser igual ao numero   ex: botão 7, paramêtro vai ser 7--->
+   
+     <script>
+
+        function insert(num){
+            // dentro do elemento que tem o id RESULT eu vou inserir
+            // o parametro NUM toda vez que eu apertar o bota da calculadora
+            var numero = document.getElementById('result').innerHTML;
+            document.getElementById('result').innerHTML = numero + num;
+        }
+
+        function clean() {
+            document.getElementById('result').innerHTML = '';
+        }
+
+        function back() {
+            var resultado = document.getElementById('result').innerHTML;
+            document.getElementById('result').innerHTML = resultado.substring(0,resultado.length -1)
+        }
+
+        function calcular(){
+            var resultado = document.getElementById('result').innerHTML;
+            if (resultado){
+                document.getElementById('result').innerHTML = eval(resultado);
+            }
+            else{
+                document.getElementById('result').innerHTML = 'nada...'
+            }
+        }
+
+     </script>
+    
+</body>
+</html>
